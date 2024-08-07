@@ -50,48 +50,53 @@ Before we start our labs we shall run a few 60-second quick tests to dial in cli
 
 | 1
 | 34722.2
-| ???
-| ???
+| 1338.6
+| 665.55
 
 | 8
 | 4340.27
-| ???
-| ???
+| 2386.96
+| 2325.85
 
 | 16
 | 2170.14
-| ???
-| ???
+| 1728.17
+| 1694.91
 
 | 32
 | 1085.07
-| ???
-| ???
+| *_1414.77_*
+| 867.71
 
 | 64
 | 542.53
-| ???
-| ???
+| *_852.64_*
+| 470.66
 
 | 128
 | 271.27
-| ???
-| ???
+| *_510.38_*
+| 229.56
 
 | 256
 | 135.63
-| ???
-| ???
+| *_237.67_* (sweet spot)
+| 117.10
 
 | 512
 | 67.81
-| ???
-| ???
+| *_116.97_*
+| 57.68
 
 | 1024
 | 33.90
-| ???
-| ???
+| *_59.10_*
+| 32.07
+
+| 2048
+| 16.95
+| *_30.58_*
+| *_16.98_* (best fit)
 |===
 
 == Lets get this test case running
@@ -123,14 +128,14 @@ On the Server host we'll execute the following maven profile:
 
 [,bash,linenum]
 ----
-$mvn -Pserver -Dhost=0.0.0.0
+$mvn -Pserver -Dhost=0.0.0.0 -Dprotocol=http
 ----
 
 On the Client host we'll execute the client profile, supplying instructions to use get operation, ??? threads (simulate ??? clients), over a time of 8 hours (60 x 60 x 8 = 28800 seconds).
 
 [,bash,linenum]
 ----
-$mvn -Pclient -Dhost=192.168.50.154 -Doperation=get -Dthreads=??? -Dtime=28800
+$mvn -Pclient -Dhost=192.168.50.154 -Dprotocol=http -Doperation=get -Dthreads=??? -Dtime=28800
 ----
 
 For the purposes of our lab test, we'll allow the suite to execute without added agents to the JVM.

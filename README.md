@@ -78,15 +78,16 @@ PPC64LE client → x64 server).
 
 | Clients | Target Calls/Second per client | Quick Test (Reality) per x64 client | Quick Test (Reality) per PPC64LE client |
 |----|----|----|----|
-| 1 | 34722.2 | ??? | ??? |
-| 8 | 4340.27 | ??? | ??? |
-| 16 | 2170.14 | ??? | ??? |
-| 32 | 1085.07 | ??? | ??? |
-| 64 | 542.53 | ??? | ??? |
-| 128 | 271.27 | ??? | ??? |
-| 256 | 135.63 | ??? | ??? |
-| 512 | 67.81 | ??? | ??? |
-| 1024 | 33.90 | ??? | ??? |
+| 1 | 34722.2 | 1338.6 | 665.55 |
+| 8 | 4340.27 | 2386.96 | 2325.85 |
+| 16 | 2170.14 | 1728.17 | 1694.91 |
+| 32 | 1085.07 | ***1414.77*** | 867.71 |
+| 64 | 542.53 | ***852.64*** | 470.66 |
+| 128 | 271.27 | ***510.38*** | 229.56 |
+| 256 | 135.63 | ***237.67*** (sweet spot) | 117.10 |
+| 512 | 67.81 | ***116.97*** | 57.68 |
+| 1024 | 33.90 | ***59.10*** | 32.07 |
+| 2048 | 16.95 | ***30.58*** | ***16.98*** (best fit) |
 
 # Lets get this test case running
 
@@ -116,7 +117,7 @@ $ cd performance/jaxrs
 On the Server host we’ll execute the following maven profile:
 
 ``` bash
-$mvn -Pserver -Dhost=0.0.0.0
+$mvn -Pserver -Dhost=0.0.0.0 -Dprotocol=http
 ```
 
 On the Client host we’ll execute the client profile, supplying
@@ -124,7 +125,7 @@ instructions to use get operation, ??? threads (simulate ??? clients),
 over a time of 8 hours (60 x 60 x 8 = 28800 seconds).
 
 ``` bash
-$mvn -Pclient -Dhost=192.168.50.154 -Doperation=get -Dthreads=??? -Dtime=28800
+$mvn -Pclient -Dhost=192.168.50.154 -Dprotocol=http -Doperation=get -Dthreads=??? -Dtime=28800
 ```
 
 For the purposes of our lab test, we’ll allow the suite to execute
