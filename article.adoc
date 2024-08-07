@@ -4,20 +4,21 @@ We've investigated https://github.com/savoirtech/apache-cxf-soap-performance[Apa
 
 == The Setup
 
-image::./assets/images/HardwareSetup.png[alt=Hardware,width=480,height=640,align="center"]
+image::./assets/images/Systems.png[alt=Systems,width=480,height=640,align="center"]
 
 For our lab test we'll be using the following hardware:
 
-* Dell PowerEdge R250 (Client Host)
+* Dell PowerEdge R250
 ** Intel Xeon E-2378 (8c, 16t)
 ** 128 GB DDR4 RAM
 ** 1 Gigabit Ethernet
 ** Ubuntu 22.04 LTS
-* Raptor Blackbird (Server Host)
+* Raptor Blackbird
 ** IBM POWER9 v2 SMT4 Sforza (8c, 32 t)
 ** 128 GB DDR4 RAM
 ** 1 Gigabit Ethernet
 ** CentOS Stream 9
+* Dell PowerConnect 2808 (network switch)
 
 The machines are co-located on the same switch, reducing the number of packet hops.
 

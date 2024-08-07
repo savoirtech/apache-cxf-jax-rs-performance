@@ -9,12 +9,12 @@ these approaches.
 # The Setup
 
 <figure>
-<img src="./assets/images/HardwareSetup.png" alt="Hardware" />
+<img src="./assets/images/Systems.png" alt="Systems" />
 </figure>
 
 For our lab test we’ll be using the following hardware:
 
-- Dell PowerEdge R250 (Client Host)
+- Dell PowerEdge R250
 
   - Intel Xeon E-2378 (8c, 16t)
 
@@ -24,7 +24,7 @@ For our lab test we’ll be using the following hardware:
 
   - Ubuntu 22.04 LTS
 
-- Raptor Blackbird (Server Host)
+- Raptor Blackbird
 
   - IBM POWER9 v2 SMT4 Sforza (8c, 32 t)
 
@@ -33,6 +33,8 @@ For our lab test we’ll be using the following hardware:
   - 1 Gigabit Ethernet
 
   - CentOS Stream 9
+
+- Dell PowerConnect 2808 (network switch)
 
 The machines are co-located on the same switch, reducing the number of
 packet hops.
