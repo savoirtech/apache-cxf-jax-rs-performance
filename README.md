@@ -88,7 +88,55 @@ PPC64LE client → x64 server).
 | 512 | 67.81 | ??? | ??? |
 | 1024 | 33.90 | ??? | ??? |
 
+# Lets get this test case running
+
+To run the performance harness we change directory into samples. Within
+this folder we’ll build the base harness and the various scenarios.
+
+On each host we will open a terminal to the CXF distribution samples
+folder.
+
+We’ll ensure we have JAVA_HOME and MAVEN_HOME environment variables set.
+
+For our first run we’ll use Adoptium Eclipse Temurin 17 LTS as Client
+and Server side JVM.
+
+We set our Heap size to 8GB.
+
+``` bash
+MAVEN_OPTS="-Xms32m -Xmx8192m -Dmaven.artifact.threads=5"
+```
+
+``` bash
+$ cd samples
+$ mvn clean install
+$ cd performance/jaxrs
+```
+
+On the Server host we’ll execute the following maven profile:
+
+``` bash
+$mvn -Pserver -Dhost=0.0.0.0
+```
+
+On the Client host we’ll execute the client profile, supplying
+instructions to use get operation, ??? threads (simulate ??? clients),
+over a time of 8 hours (60 x 60 x 8 = 28800 seconds).
+
+``` bash
+$mvn -Pclient -Dhost=192.168.50.154 -Doperation=get -Dthreads=??? -Dtime=28800
+```
+
+For the purposes of our lab test, we’ll allow the suite to execute
+without added agents to the JVM.
+
 # Lab Time!
+
+## First Iteration
+
+## Second Iteration
+
+## Third Iteration
 
 # Results and Conclusion
 
