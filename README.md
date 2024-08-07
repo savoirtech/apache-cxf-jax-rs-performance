@@ -69,6 +69,25 @@ clients, and tabulate the total calls.
 
 # Theory Time!
 
+In our previous performance lab we were attempting to achieve 1 Billion
+invocations in an eight-hour period. Let’s see what JAX-RS can do.
+
+Before we start our labs we shall run a few 60-second quick tests to
+dial in client counts for our systems (x64 client → PPC64LE server,
+PPC64LE client → x64 server).
+
+| Clients | Target Calls/Second per client | Quick Test (Reality) per x64 client | Quick Test (Reality) per PPC64LE client |
+|----|----|----|----|
+| 1 | 34722.2 | ??? | ??? |
+| 8 | 4340.27 | ??? | ??? |
+| 16 | 2170.14 | ??? | ??? |
+| 32 | 1085.07 | ??? | ??? |
+| 64 | 542.53 | ??? | ??? |
+| 128 | 271.27 | ??? | ??? |
+| 256 | 135.63 | ??? | ??? |
+| 512 | 67.81 | ??? | ??? |
+| 1024 | 33.90 | ??? | ??? |
+
 # Lab Time!
 
 # Results and Conclusion
