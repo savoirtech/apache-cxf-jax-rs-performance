@@ -121,11 +121,11 @@ $mvn -Pserver -Dhost=0.0.0.0 -Dprotocol=http
 ```
 
 On the Client host we’ll execute the client profile, supplying
-instructions to use get operation, ??? threads (simulate ??? clients),
+instructions to use get operation, 256 threads (simulate 256 clients),
 over a time of 8 hours (60 x 60 x 8 = 28800 seconds).
 
 ``` bash
-$mvn -Pclient -Dhost=192.168.50.154 -Dprotocol=http -Doperation=get -Dthreads=??? -Dtime=28800
+$mvn -Pclient -Dhost=192.168.50.154 -Dprotocol=http -Doperation=get -Dthreads=256 -Dtime=28800
 ```
 
 For the purposes of our lab test, we’ll allow the suite to execute
@@ -135,9 +135,86 @@ without added agents to the JVM.
 
 ## First Iteration
 
+On our first iteration we quickly encountered a runtime error.
+
+Client Side:
+
+``` bash
+ConnectException invoking http://192.168.50.154:9000/customerservice/customers/123: Cannot assign requested address
+```
+
+Given our quick tests indicated we have valid configuration for
+connection between client and server side, we’ll attempt reduce thread
+count on our second run.
+
 ## Second Iteration
 
+``` bash
+$mvn -Pclient -Dhost=192.168.50.154 -Dprotocol=http -Doperation=get -Dthreads=128 -Dtime=28800
+```
+
+Client Side:
+
+``` bash
+ConnectException invoking http://192.168.50.154:9000/customerservice/customers/123: Cannot assign requested address
+```
+
 ## Third Iteration
+
+The "Cannot assign requested address" tends to indicate that we’re
+saturating the port with so many connections.
+
+``` bash
+$mvn -Pclient -Dhost=192.168.50.154 -Dprotocol=http -Doperation=get -Dthreads=64 -Dtime=28800
+```
+
+This quickly failed as well.
+
+Checking ulimits, file count was restricted to 1024. We update this to
+10240 and retest.
+
+## Fourth Iteration
+
+``` bash
+$mvn -Pclient -Dhost=192.168.50.154 -Dprotocol=http -Doperation=get -Dthreads=256 -Dtime=28800
+```
+
+Server Side:
+
+``` bash
+Aug 08, 2024 8:43:42 AM org.eclipse.jetty.server.AbstractConnector handleAcceptFailure
+WARNING: Accept Failure
+java.io.IOException: Too many open files
+```
+
+## Fifth Iteration
+
+We need to increase the number of available file handles on our systems.
+
+``` bash
+$sudo vi /etc/security/limits.conf
+*           soft    nofile          655350
+*           hard    nofile          655350
+```
+
+Restart system.
+
+``` bash
+$ulimit -n unlimited
+$ulimit -n
+655350
+```
+
+Lets retry our initial test case:
+
+``` bash
+$mvn -Pclient -Dhost=192.168.50.154 -Dprotocol=http -Doperation=get -Dthreads=64 -Dtime=28800
+```
+
+Results in:
+
+``` bash
+```
 
 # Results and Conclusion
 
