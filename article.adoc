@@ -52,56 +52,70 @@ Before we start our labs we shall run a few 60-second quick tests to dial in cli
 |===
 | Clients | Target Calls/Second per client | Quick Test (Reality) Calls Per Second Per Thread on x64 client | Quick Test (Reality) Calls Per Second Per Thread on PPC64LE client
 
-| 1
-| 34722.2
-| 1338.6
-| 665.55
+^| 1
+^| 34722.2
+^| 1338.6
+^| 665.55
 
-| 8
-| 4340.27
-| 2386.96
-| 2325.85
+^| 8
+^| 4340.27
+^| 2386.96
+^| 2325.85
 
-| 16
-| 2170.14
-| 1728.17
-| 1694.91
+^| 16
+^| 2170.14
+^| 1728.17
+^| 1694.91
 
-| 32
-| 1085.07
-| *_1414.77_*
-| 867.71
+^| 32
+^| 1085.07
+^| *_1414.77_*
+^| 867.71
 
-| 64
-| 542.53
-| *_852.64_*
-| 470.66
+^| 64
+^| 542.53
+^| *_852.64_*
+^| 470.66
 
-| 128
-| 271.27
-| *_510.38_*
-| 229.56
+^| 128
+^| 271.27
+^| *_510.38_*
+^| 229.56
 
-| 256
-| 135.63
-| *_237.67_* (sweet spot)
-| 117.10
+^| 256
+^| 135.63
+^| *_237.67_* (sweet spot)
+^| 117.10
 
-| 512
-| 67.81
-| *_116.97_*
-| 57.68
+^| 512
+^| 67.81
+^| *_116.97_*
+^| 57.68
 
-| 1024
-| 33.90
-| *_59.10_*
-| 32.07
+^| 1024
+^| 33.90
+^| *_59.10_*
+^| 32.07
 
-| 2048
-| 16.95
-| *_30.58_*
-| *_16.98_* (best fit)
+^| 2048
+^| 16.95
+^| *_30.58_*
+^| *_16.98_* (best fit)
 |===
+
+[cols("^1","^1")]
+|===
+^| PPC64LE ^| X64
+
+a|image::./assets/images/PPC64LETests.png[alt=PPC64LETests,width=480,height=640,align="center"]
+a|image::./assets/images/X64Tests.png[alt=X64Tests,width=480,height=640,align="center"]
+
+| When running PPC64LE as the server-side we hope to achieve 60843.52 calls per second (256 threads * 237.67 = 60843.52).
+| When running x64 as the server-side we hop to achieve 34775.04 calls per second (2048 threads * 16.98 = 34775.04).
+
+|===
+
+
 
 == Lets get this test case running
 

@@ -96,6 +96,37 @@ PPC64LE client → x64 server).
 | 1024 | 33.90 | ***59.10*** | 32.07 |
 | 2048 | 16.95 | ***30.58*** | ***16.98*** (best fit) |
 
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">PPC64LE</th>
+<th style="text-align: center;">X64</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><figure>
+<img src="./assets/images/PPC64LETests.png" alt="PPC64LETests" />
+</figure></td>
+<td style="text-align: left;"><figure>
+<img src="./assets/images/X64Tests.png" alt="X64Tests" />
+</figure></td>
+</tr>
+<tr>
+<td style="text-align: left;"><p>When running PPC64LE as the server-side
+we hope to achieve 60843.52 calls per second (256 threads * 237.67 =
+60843.52).</p></td>
+<td style="text-align: left;"><p>When running x64 as the server-side we
+hop to achieve 34775.04 calls per second (2048 threads * 16.98 =
+34775.04).</p></td>
+</tr>
+</tbody>
+</table>
+
 # Lets get this test case running
 
 To run the performance harness we change directory into samples. Within
