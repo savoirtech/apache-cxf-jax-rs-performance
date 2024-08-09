@@ -3,8 +3,15 @@
 We’ve investigated [Apache CXF Soap
 Performance](https://github.com/savoirtech/apache-cxf-soap-performance)
 in our testing lab, now its time to focus on JAX-RS. We’ll be using the
-same systems, so we’ll get to see the through put difference between
+same systems, so we’ll get to see the through-put difference between
 these approaches.
+
+We’ll also get to see some of the config and tuning required to ready
+the systems to stably run the performance suite.
+
+<figure>
+<img src="./assets/images/PPC64LEvsX64.png" alt="PPC64LEvsX64" />
+</figure>
 
 # The Setup
 
@@ -215,6 +222,11 @@ Results in:
 
 ``` bash
 ```
+
+The server side file handle exhaustion appears to be managed. The client
+side is still experiencing bind exceptions.
+
+## Sixth Iteration
 
 # Results and Conclusion
 
