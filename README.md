@@ -76,7 +76,7 @@ Before we start our labs we shall run a few 60-second quick tests to
 dial in client counts for our systems (x64 client → PPC64LE server,
 PPC64LE client → x64 server).
 
-| Clients | Target Calls/Second per client | Quick Test (Reality) per x64 client | Quick Test (Reality) per PPC64LE client |
+| Clients | Target Calls/Second per client | Quick Test (Reality) Calls Per Second Per Thread on x64 client | Quick Test (Reality) Calls Per Second Per Thread on PPC64LE client |
 |----|----|----|----|
 | 1 | 34722.2 | 1338.6 | 665.55 |
 | 8 | 4340.27 | 2386.96 | 2325.85 |
