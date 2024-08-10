@@ -113,6 +113,9 @@ a|image::./assets/images/X64Tests.png[alt=X64Tests,width=480,height=640,align="c
 | When running PPC64LE as the server-side we hope to achieve 60843.52 calls per second (256 threads * 237.67 = 60843.52).
 | When running x64 as the server-side we hop to achieve 34775.04 calls per second (2048 threads * 16.98 = 34775.04).
 
+| 1,752,293,376 projected eight-hour served request goal.
+| 1,001,521,152 projected eight-hour served request goal.
+
 |===
 
 

@@ -124,6 +124,12 @@ we hope to achieve 60843.52 calls per second (256 threads * 237.67 =
 hop to achieve 34775.04 calls per second (2048 threads * 16.98 =
 34775.04).</p></td>
 </tr>
+<tr>
+<td style="text-align: left;"><p>1,752,293,376 projected eight-hour
+served request goal.</p></td>
+<td style="text-align: left;"><p>1,001,521,152 projected eight-hour
+served request goal.</p></td>
+</tr>
 </tbody>
 </table>
 
