@@ -252,10 +252,16 @@ $mvn -Pclient -Dhost=192.168.50.154 -Dprotocol=http -Doperation=get -Dthreads=64
 Results in:
 
 ``` bash
+Cannot assign requested address
 ```
 
+<figure>
+<img src="./assets/images/LabTest.png" alt="LabTest" />
+</figure>
+
 The server side file handle exhaustion appears to be managed. The client
-side is still experiencing bind exceptions.
+side is still experiencing bind exceptions. We are going to resolve the
+bind exceptions and get this lab system rolling!
 
 ## Sixth Iteration
 
