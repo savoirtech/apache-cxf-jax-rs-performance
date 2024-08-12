@@ -305,13 +305,20 @@ This provides us with some 49000 ephemeral ports.
 Now lets re-run our table of values, with 49k ports in use as a ceiling
 value (also retaining the other configuration changes).
 
-| Clients | PPC64LE Server / X64 Client in Calls/Second | Peak Connections (Threads x Calls/Second) | PPC64LE Client / X64 Server in Calls/Second | Peak Connections (Threads x Calls/Second) |
+| Clients | PPC64LE Server / X64 Client in Calls/Second | New Connections (Threads x Calls/Second) | PPC64LE Client / X64 Server in Calls/Second | New Connections (Threads x Calls/Second) |
 |----|----|----|----|----|
 | 1 | 1196.50 | 1196.50 | 1264.84 | 1264.84 |
 | 8 | 2448.19 | 19585.52 | 2182.08 | 17456.64 |
 | 16 | 1886.69 | 30187.04 | 1590.65 | 25450.4 |
 | 32 | 1449.83 | 46394.56 | 1019.92 | 32637.44 |
 | 64 | 942.33 | 60309.12 | 553.47 | 35422.08 |
+
+These numbers represent new connections happening in a 1-second period -
+many of those ports are going to be in use, so we do not expect new
+connections/second to be through put sweet spot.
+
+In theory having 49000 active connections/second will get us to 49000 x
+28800 = 1,411,200,000 calls processed in an eight-hour period.
 
 # Results and Conclusion
 

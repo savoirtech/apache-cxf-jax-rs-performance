@@ -288,7 +288,7 @@ Now lets re-run our table of values, with 49k ports in use as a ceiling value (a
 
 [cols("^1","^1","^1","^1")]
 |===
-^| Clients ^| PPC64LE Server / X64 Client in Calls/Second ^| Peak Connections (Threads x Calls/Second) ^| PPC64LE Client / X64 Server in Calls/Second ^| Peak Connections (Threads x Calls/Second)
+^| Clients ^| PPC64LE Server / X64 Client in Calls/Second ^| New Connections (Threads x Calls/Second) ^| PPC64LE Client / X64 Server in Calls/Second ^| New Connections (Threads x Calls/Second)
 
 ^| 1
 ^| 1196.50
@@ -321,6 +321,10 @@ Now lets re-run our table of values, with 49k ports in use as a ceiling value (a
 ^| 35422.08
 
 |===
+
+These numbers represent new connections happening in a 1-second period - many of those ports are going to be in use, so we do not expect new connections/second to be through put sweet spot.
+
+In theory having 49000 active connections/second will get us to 49000 x 28800 = 1,411,200,000 calls processed in an eight-hour period.
 
 
 == Results and Conclusion
