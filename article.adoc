@@ -256,6 +256,65 @@ The server side file handle exhaustion appears to be managed. The client side is
 
 === Sixth Iteration
 
+So the issue we're hitting is called ephemeral port exhaustion.
+
+[,bash,linenum]
+----
+[jgoodyear@localhost jaxrs]$ cat /proc/sys/net/ipv4/ip_local_port_range
+32768	60999
+----
+
+Our systems local port range is about 28k connections (60999 - 32768). Our testing scenario has been attempting to push 256 threads x 237.67 calls/second ==  ~60843 calls/second - we exhaust the range, which reports as a bind exception to us.
+
+We have a couple of options to improve our performance:
+
+* Increase port range (this has limits 65535 for IPV4 or IPV6)
+* Tweak time wait settings (not something we generally want to do)
+* Add NIC ports to scale range (load balancing clients over addresses)
+
+==== Theory Time Revisited!
+
+We extend our port range as follows:
+
+[,bash,linenum]
+----
+$ sudo sysctl -w net.ipv4.ip_local_port_range="15000 64000"
+net.ipv4.ip_local_port_range = 15000 64000
+----
+
+This provides us with some 49000 ephemeral ports.
+
+Now lets re-run our table of values, with 49k ports in use as a ceiling value (also retaining the other configuration changes).
+
+[cols("^1","^1","^1","^1")]
+|===
+^| Clients ^| PPC64LE Server / X64 Client ^| Peak Connections ^| PPC64LE Client / X64 Server ^| Peak Connections
+
+^| 1
+^|
+^|
+^|
+^|
+
+^| 8
+^|
+^|
+^|
+^|
+
+^| 16
+^|
+^|
+^|
+^|
+
+^| 32
+^|
+^|
+^|
+^|
+
+|===
 
 
 == Results and Conclusion
