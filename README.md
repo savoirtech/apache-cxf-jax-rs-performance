@@ -305,12 +305,13 @@ This provides us with some 49000 ephemeral ports.
 Now lets re-run our table of values, with 49k ports in use as a ceiling
 value (also retaining the other configuration changes).
 
-| Clients | PPC64LE Server / X64 Client | Peak Connections | PPC64LE Client / X64 Server | Peak Connections |
+| Clients | PPC64LE Server / X64 Client in Calls/Second | Peak Connections (Threads x Calls/Second) | PPC64LE Client / X64 Server in Calls/Second | Peak Connections (Threads x Calls/Second) |
 |----|----|----|----|----|
-| 1 |  |  |  |  |
-| 8 |  |  |  |  |
-| 16 |  |  |  |  |
-| 32 |  |  |  |  |
+| 1 | 1196.50 | 1196.50 | 1264.84 | 1264.84 |
+| 8 | 2448.19 | 19585.52 | 2182.08 | 17456.64 |
+| 16 | 1886.69 | 30187.04 | 1590.65 | 25450.4 |
+| 32 | 1449.83 | 46394.56 | 1019.92 | 32637.44 |
+| 64 | 942.33 | 60309.12 | 553.47 | 35422.08 |
 
 # Results and Conclusion
 
