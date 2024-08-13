@@ -320,6 +320,44 @@ connections/second to be through put sweet spot.
 In theory having 49000 active connections/second will get us to 49000 x
 28800 = 1,411,200,000 calls processed in an eight-hour period.
 
+``` bash
+$mvn -Pserver -Dhost=0.0.0.0 -Dprotocol=http
+```
+
+``` bash
+$mvn -Pclient -Dhost=192.168.50.154 -Dprotocol=http -Doperation=get -Dthreads=16 -Dtime=28800
+```
+
+While running the perf suite, we observe:
+
+Server Side:
+
+``` bash
+[jgoodyear@localhost ~]$ ss -s
+Total: 34371
+TCP:   39980 (estab 16011, closed 6131, orphaned 0, timewait 6131)
+```
+
+Client Side:
+
+``` bash
+jgoodyear@jgoodyear-PowerEdge-R250:~$ ss -s
+Total: 41580
+TCP:   40883 (estab 16010, closed 0, orphaned 0, timewait 0)
+```
+
+This resulted in:
+
+``` bash
+jakarta.ws.rs.ProcessingException: java.net.ConnectException: ConnectException invoking http://192.168.50.154:9000/customerservice/customers/123: Cannot assign requested address
+```
+
+We still ran out of ephemeral ports!
+
+## Seventh Iteration
+
+We need to address ephemeral port usage.
+
 # Results and Conclusion
 
 # About the Authors
