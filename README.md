@@ -356,7 +356,26 @@ We still ran out of ephemeral ports!
 
 ## Seventh Iteration
 
-We need to address ephemeral port usage.
+Out performance client is not closing out connections. We update the
+test client code to force response objects to close their streams. We
+could deduce this by reviewing the test code - each client thread
+creates one WebClient, which it reuses for each call, so the remaining
+connection was likely common from response object input stream - closing
+that immediately reduced lingering connections.
+
+``` bash
+$mvn -Pserver -Dhost=0.0.0.0 -Dprotocol=http
+```
+
+``` bash
+$mvn -Pclient -Dhost=192.168.50.154 -Dprotocol=http -Doperation=get -Dthreads=16 -Dtime=28800
+```
+
+This resulted in:
+
+``` bash
+???
+```
 
 # Results and Conclusion
 
