@@ -415,6 +415,30 @@ We're ready to ramp up connections!
 
 Lets run 32 Client threads and check for stability, and throughput.
 
+This resulted in:
+[,bash,linenum]
+----
+=============Overall Test Result============
+Overall Throughput: get 1363.052828409949 (invocations/sec)
+Overall AVG. response time: 0.7336472799565198 (ms)
+1.256210783E9 (invocations), running 921615.624 (sec)
+============================================
+----
+
+1,256,210,783 calls processed in eight-hour period.
+
+=== Ninth Iteration
+
+Our system still appears stable, lets run 64 Clients.
+
+This resulted in:
+[,bash,linenum]
+----
+???
+----
+
+??? calls processed in eight-hour period.
+
 == Results and Conclusion
 
 == About the Authors
