@@ -374,8 +374,42 @@ $mvn -Pclient -Dhost=192.168.50.154 -Dprotocol=http -Doperation=get -Dthreads=16
 This resulted in:
 
 ``` bash
-???
+=============Overall Test Result============
+Overall Throughput: get 1772.9019709123222 (invocations/sec)
+Overall AVG. response time: 0.5640469785734444 (ms)
+8.16959077E8 (invocations), running 460803.29899999994 (sec)
+============================================
 ```
+
+In this run our system stability obtained 816,959,077 calls in an
+eight-hour period. Given we were running just 16 clients, this number is
+pretty good (comparing to our JAX-WS perf testing).
+
+During the test run we observed the following socket statistic:
+
+PPC64LE Server Side:
+
+``` bash
+[jgoodyear@localhost ~]$ ss -s
+Total: 545
+TCP:   23 (estab 18, closed 0, orphaned 0, timewait 0)
+```
+
+x64 Client Side:
+
+``` bash
+jgoodyear@jgoodyear-PowerEdge-R250:~$ ss -s
+Total: 720
+TCP:   5013 (estab 18, closed 4990, orphaned 0, timewait 4990)
+```
+
+Our concurrent connections appeared to be stable.
+
+We’re ready to ramp up connections!
+
+## Eighth Iteration
+
+Lets run 32 Client threads and check for stability, and throughput.
 
 # Results and Conclusion
 
