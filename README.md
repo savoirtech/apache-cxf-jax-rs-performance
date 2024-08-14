@@ -356,12 +356,34 @@ We still ran out of ephemeral ports!
 
 ## Seventh Iteration
 
-Out performance client is not closing out connections. We update the
-test client code to force response objects to close their streams. We
-could deduce this by reviewing the test code - each client thread
-creates one WebClient, which it reuses for each call, so the remaining
-connection was likely common from response object input stream - closing
-that immediately reduced lingering connections.
+Our performance client is not closing out connections.
+
+### Let’s play spot the connection leak!
+
+Our original client code:
+
+``` java
+try {
+    Response respGet = webClient.get();
+    Asserts.check(respGet.getStatus() == 200, "Get should have been OK");
+}
+```
+
+Can you spot the connection leak?
+
+Here’s a hint - the Response object retains an input stream.
+
+We update the test client code to force response objects to close their
+streams. We resolve this by allowing the auto close feature to close out
+connections.
+
+``` java
+try (Response respGet = webClient.get()) {
+    Asserts.check(respGet.getStatus() == 200, "Get should have been OK");
+}
+```
+
+With this change in place, we setup to run another test.
 
 ``` bash
 $mvn -Pserver -Dhost=0.0.0.0 -Dprotocol=http
@@ -425,15 +447,28 @@ Overall AVG. response time: 0.7336472799565198 (ms)
 
 ## Ninth Iteration
 
-Our system still appears stable, lets run 64 Clients.
+Our system still appears stable, lets run 64 Clients (PPC64LE server,
+x64 Clients).
+
+This resulted in client side exceptions:
+
+``` bash
+jakarta.ws.rs.ProcessingException: java.net.ConnectException: ConnectException invoking http://192.168.50.154:9000/customerservice/customers/123: Cannot assign requested address
+```
+
+We hit the port range limit again.
+
+## Tenth Iteration
+
+Lets turn roles around, running x64 server-side, and PPC64LE clients.
+Same configurations and tunings applied to each host. We will start with
+32 clients.
 
 This resulted in:
 
 ``` bash
 ???
 ```
-
-??? calls processed in eight-hour period.
 
 # Results and Conclusion
 
