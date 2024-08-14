@@ -460,6 +460,17 @@ We hit the port range limit again.
 
 ## Tenth Iteration
 
+One more configuration to try before swapping machine roles, in this run
+we’ll try 48 clients.
+
+This resulted in :
+
+``` bash
+???
+```
+
+## Eleventh Iteration
+
 Lets turn roles around, running x64 server-side, and PPC64LE clients.
 Same configurations and tunings applied to each host. We will start with
 32 clients.
@@ -470,7 +481,54 @@ This resulted in:
 ???
 ```
 
+## Twelfth Iteration
+
+This resulted in:
+
+``` bash
+???
+```
+
 # Results and Conclusion
+
+Our lab experiments managed to push our hardware/software to its limits
+before starting to change hardware (adding NICs or more client host
+machines) or utilize VM/Docker/K8s.
+
+Achieving peak concurrency (and therefore throughput) was possible,
+leaving CPU/Memory/Bandwidth available for other purposes. Port range
+becoming the hard limit in this configuration.
+
+Observations:
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">PPC64LE</th>
+<th style="text-align: center;">X64</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><figure>
+<img src="./assets/images/CoolPPC64LE.png" alt="PPC64LE" />
+</figure></td>
+<td style="text-align: center;"><figure>
+<img src="./assets/images/CoolX64.png" alt="X64" />
+</figure></td>
+</tr>
+<tr>
+<td style="text-align: left;"><p>placeholder</p></td>
+<td style="text-align: left;"><p>placeholder</p></td>
+</tr>
+</tbody>
+</table>
+
+All that remains of our lab is to allow our machines to cool off.
 
 # About the Authors
 
