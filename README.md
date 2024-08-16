@@ -543,8 +543,8 @@ TCP:   7012 (estab 260, closed 6747, orphaned 0, timewait 6747)
 # Results and Conclusion
 
 As our first foray into JAX-RS performance testing, we quickly learned
-about system resources that would quickly become bottlenecks. Once we
-adjusted those values we could start running our eight-hour test cases.
+about system resources that would become bottlenecks. Once we adjusted
+those values we could start running our eight-hour test cases.
 
 The key bottleneck per system turned out to be managing client side
 ephemeral port exhaustion. Ensuring our clients close in-use ports as
