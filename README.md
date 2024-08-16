@@ -2,12 +2,14 @@
 
 We’ve investigated [Apache CXF Soap
 Performance](https://github.com/savoirtech/apache-cxf-soap-performance)
-in our testing lab, now its time to focus on JAX-RS. We’ll be using the
+in our testing lab, now it’s time to focus on JAX-RS. We’ll be using the
 same systems, so we’ll get to see the through-put difference between
 these approaches.
 
 We’ll also get to see some of the config and tuning required to ready
-the systems to stably run the performance suite.
+the systems to stably run the performance suite. All of our testing will
+use Adoptium Eclipse Temurin 17 LTS as it’s available for both PPC64LE
+and X64 Linux systems.
 
 <figure>
 <img src="./assets/images/PPC64LEvsX64.png" alt="PPC64LEvsX64" />
@@ -143,8 +145,8 @@ folder.
 
 We’ll ensure we have JAVA_HOME and MAVEN_HOME environment variables set.
 
-For our first run we’ll use Adoptium Eclipse Temurin 17 LTS as Client
-and Server side JVM.
+For our runs we’ll use Adoptium Eclipse Temurin 17 LTS as Client and
+Server side JVM.
 
 We set our Heap size to 8GB.
 
@@ -540,15 +542,25 @@ TCP:   7012 (estab 260, closed 6747, orphaned 0, timewait 6747)
 
 # Results and Conclusion
 
-Our lab experiments managed to push our hardware/software to its limits
-before starting to change hardware (adding NICs or more client host
-machines) or utilize VM/Docker/K8s.
+As our first foray into JAX-RS performance testing, we quickly learned
+about system resources that would quickly become bottlenecks. Once we
+adjusted those values we could start running our eight-hour test cases.
 
-Achieving peak concurrency (and therefore throughput) was possible,
-leaving CPU/Memory/Bandwidth available for other purposes. Port range
-becoming the hard limit in this configuration.
+The key bottleneck per system turned out to be managing client side
+ephemeral port exhaustion. Ensuring our clients close in-use ports as
+quickly as possible was our first major improvement towards running our
+test cases, dialing in the total number of client threads was the
+second.
 
-Observations:
+## System Config Settings TL;DR
+
+| Parameter | Setting |
+|----|----|
+| MAVEN_OPTS | -Xms32m -Xmx8192m |
+| file handle ulimit | /etc/security/limits.conf hard & soft limits increased to 655350 |
+| ip_local_port_range | sysctl -w net.ipv4.ip_local_port_range="15000 64000" to allow 49K connections. |
+
+## Observations:
 
 <table>
 <colgroup>
@@ -571,13 +583,41 @@ Observations:
 </figure></td>
 </tr>
 <tr>
-<td style="text-align: left;"><p>placeholder</p></td>
-<td style="text-align: left;"><p>placeholder</p></td>
+<td style="text-align: left;"><p>Original Target: 1,752,293,376</p></td>
+<td style="text-align: left;"><p>Original Target: 1,001,521,152</p></td>
+</tr>
+<tr>
+<td style="text-align: left;"><p>Throughput Achieved:
+1,510,322,517</p></td>
+<td style="text-align: left;"><p>Throughput Achieved:
+775,651,656</p></td>
 </tr>
 </tbody>
 </table>
 
-All that remains of our lab is to allow our machines to cool off.
+Compared to our [JAX-WS performance
+testing](https://github.com/savoirtech/apache-cxf-soap-performance) our
+JAX-RS runs managed to process more calls in total while running on
+modest sized heaps.
+
+The PPC64LE system acting as client or server appeared to be less
+sensitive to port exhaustion than the X64 machine, however it still
+would suffer the same bottleneck.
+
+The X64 system appeared to run out of gas to process more requests (32 →
+256 clients yielded very similar results), it would be interesting to
+run JVM tunings here to see if there is another bottleneck at play.
+
+## Future Work
+
+There are of course more scenarios we could test, which we intend to
+perform in follow-up posts.
+
+- Retest on Java 21 LTS
+
+- Larger Heap spaces
+
+- Adjust thread stack size
 
 # About the Authors
 
