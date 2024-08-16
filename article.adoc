@@ -471,8 +471,14 @@ One more configuration to try before swapping machine roles, in this run we'll t
 This resulted in :
 [,bash,linenum]
 ----
-???
+=============Overall Test Result============
+Overall Throughput: get 1092.5105255070816 (invocations/sec)
+Overall AVG. response time: 0.9153229892552811 (ms)
+1.510322517E9 (invocations), running 1382432.921 (sec)
+============================================
 ----
+
+This time we managed 1,510,322,517 calls in eight-hour period.
 
 === Eleventh Iteration
 
@@ -481,15 +487,53 @@ Lets turn roles around, running x64 server-side, and PPC64LE clients. Same confi
 This resulted in:
 [,bash,linenum]
 ----
-???
+=============Overall Test Result============
+Overall Throughput: get 831.0453771395204 (invocations/sec)
+Overall AVG. response time: 1.203303727459535 (ms)
+7.65905672E8 (invocations), running 921617.1500000001 (sec)
+============================================
 ----
 
+Our first run yielded 765,905,672 calls in an eight-hour period.
+
 === Twelfth Iteration
+
+Lets double clients to 64.
 
 This resulted in:
 [,bash,linenum]
 ----
-???
+=============Overall Test Result============
+Overall Throughput: get 413.4362013002846 (invocations/sec)
+Overall AVG. response time: 2.4187528737322297 (ms)
+7.62073003E8 (invocations), running 1843266.266 (sec)
+============================================
+----
+
+This run managed to process fewer calls at 762,073,003 in eight hours.
+
+=== Thirteenth Iteration
+
+Our prior tables suggested we need a higher number of threads to achieve maximum throughput, so we'll try 256 clients for our next run. We'll observe socket statistics for system pressure.
+
+This resulted in:
+[,bash,linenum]
+----
+=============Overall Test Result============
+Overall Throughput: get 105.19034791566503 (invocations/sec)
+Overall AVG. response time: 9.506575648953428 (ms)
+7.75651656E8 (invocations), running 7373791.1450000005 (sec)
+============================================
+----
+
+This time we processed 775,651,656 calls in eight-hours. A slight improvement, but our average response time is starting to suffer for a slight throughput gain.
+
+The PPC64LE acting as client host did manage to keep its connections stable:
+[,bash,linenum]
+----
+[jgoodyear@localhost ~]$ ss -s
+Total: 787
+TCP:   7012 (estab 260, closed 6747, orphaned 0, timewait 6747)
 ----
 
 == Results and Conclusion
