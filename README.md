@@ -569,8 +569,8 @@ second.
 </colgroup>
 <thead>
 <tr>
-<th style="text-align: center;">PPC64LE</th>
-<th style="text-align: center;">X64</th>
+<th style="text-align: center;">PPC64LE Server Side</th>
+<th style="text-align: center;">X64 Server Side</th>
 </tr>
 </thead>
 <tbody>
@@ -583,14 +583,20 @@ second.
 </figure></td>
 </tr>
 <tr>
-<td style="text-align: left;"><p>Original Target: 1,752,293,376</p></td>
-<td style="text-align: left;"><p>Original Target: 1,001,521,152</p></td>
+<td style="text-align: left;"><p>Original Target: 1,752,293,376
+Calls</p></td>
+<td style="text-align: left;"><p>Original Target: 1,001,521,152
+Calls</p></td>
 </tr>
 <tr>
-<td style="text-align: left;"><p>Throughput Achieved:
-1,510,322,517</p></td>
-<td style="text-align: left;"><p>Throughput Achieved:
-775,651,656</p></td>
+<td style="text-align: left;"><p>Throughput Achieved: 1,510,322,517
+Calls</p></td>
+<td style="text-align: left;"><p>Throughput Achieved: 775,651,656
+Calls</p></td>
+</tr>
+<tr>
+<td style="text-align: left;"><p>Recorded Errors: 0</p></td>
+<td style="text-align: left;"><p>Recorded Errors: 0</p></td>
 </tr>
 </tbody>
 </table>

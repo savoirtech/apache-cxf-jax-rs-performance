@@ -563,16 +563,19 @@ The key bottleneck per system turned out to be managing client side ephemeral po
 
 [cols("1","1")]
 |===
-^| PPC64LE ^| X64
+^| PPC64LE Server Side ^| X64 Server Side
 
 ^a|image::./assets/images/CoolPPC64LE.png[alt=PPC64LE,width=480,height=640,align="center"]
 ^a|image::./assets/images/CoolX64.png[alt=X64,width=480,height=640,align="center"]
 
-| Original Target: 1,752,293,376
-| Original Target: 1,001,521,152
+| Original Target: 1,752,293,376 Calls
+| Original Target: 1,001,521,152 Calls
 
-| Throughput Achieved: 1,510,322,517
-| Throughput Achieved: 775,651,656
+| Throughput Achieved: 1,510,322,517 Calls
+| Throughput Achieved: 775,651,656 Calls
+
+| Recorded Errors: 0
+| Recorded Errors: 0
 
 |===
 
